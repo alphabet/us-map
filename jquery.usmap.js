@@ -269,15 +269,17 @@
       }
       
       // Bind events
+      this._onMouseDownProxy = $.proxy(this, '_onMouseDown');
       this._onClickProxy = $.proxy(this, '_onClick');
       this._onMouseOverProxy = $.proxy(this, '_onMouseOver'),
       this._onMouseOutProxy = $.proxy(this, '_onMouseOut');
         
       for(var state in this.stateHitAreas) {
         this.stateHitAreas[state].toFront();
-        $(this.stateHitAreas[state].node).bind('mouseout', this._onMouseOutProxy);
+        $(this.stateHitAreas[state].node).bind('mousedown', this._onMouseDownProxy);
         $(this.stateHitAreas[state].node).bind('click', this._onClickProxy);
         $(this.stateHitAreas[state].node).bind('mouseover', this._onMouseOverProxy);
+        $(this.stateHitAreas[state].node).bind('mouseout', this._onMouseOutProxy);
         
       }
     },
@@ -362,8 +364,9 @@
       // Bind events
       for(var state in this.labelHitAreas) {
         this.labelHitAreas[state].toFront();
-        $(this.labelHitAreas[state].node).bind('mouseout', this._onMouseOutProxy);
+        $(this.labelHitAreas[state].node).bind('mousedown', this._onMouseDownProxy);
         $(this.labelHitAreas[state].node).bind('click', this._onClickProxy);
+        $(this.labelHitAreas[state].node).bind('mouseout', this._onMouseOutProxy);
         $(this.labelHitAreas[state].node).bind('mouseover', this._onMouseOverProxy);
       }
     },
